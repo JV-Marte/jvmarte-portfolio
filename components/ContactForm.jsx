@@ -52,15 +52,14 @@ export default function ContactForm() {
       </div>
 
       <label className="field">
-        <span>Service needed</span>
+        <span>What do you need help with?</span>
         <select name="service" defaultValue="">
           <option value="" disabled>
             Select a service…
           </option>
-          <option>GoHighLevel CRM Setup</option>
-          <option>Web Development</option>
-          <option>Automation Systems</option>
-          <option>Bookkeeping & Financial Systems</option>
+          <option>CRM &amp; Lead Management</option>
+          <option>Workflow Automation</option>
+          <option>Web &amp; Operations Support</option>
           <option>Other / Not sure yet</option>
         </select>
       </label>

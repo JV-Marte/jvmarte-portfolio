@@ -140,6 +140,12 @@ a {
   gap: 0.75rem;
   margin-bottom: clamp(2.25rem, 5vw, 3.5rem);
 }
+/* short lead paragraph under a section heading */
+.section__intro {
+  color: var(--ink-soft);
+  max-width: 60ch;
+  margin-top: 0.25rem;
+}
 
 .section__title,
 .hero__title,
@@ -256,6 +262,17 @@ a {
   font-size: 0.95rem;
 }
 
+/* ---------- Visible keyboard focus (a11y) ---------- */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+/* on the dark chalkboard, the blue ring is hard to see — use yellow */
+.contact :focus-visible {
+  outline-color: #ffe27a;
+}
+
 /* ---------- Reveal ---------- */
 .reveal {
   opacity: 0;
@@ -338,8 +355,12 @@ a {
 .nav__links a:not(.nav__cta):hover {
   color: var(--ink);
 }
-.nav__links a:not(.nav__cta):hover::after {
+.nav__links a:not(.nav__cta):hover::after,
+.nav__links a:not(.nav__cta).is-active::after {
   opacity: 1;
+}
+.nav__links a:not(.nav__cta).is-active {
+  color: var(--ink);
 }
 .nav__cta {
   position: relative;
@@ -415,6 +436,15 @@ a {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+}
+/* honest trust line under the hero buttons */
+.hero__trust {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+  max-width: 44ch;
 }
 .hero__rule {
   display: flex;
@@ -918,6 +948,235 @@ a {
   color: var(--ink-soft);
 }
 
+/* ---------- Project card: extra content ---------- */
+.card__stack {
+  margin-top: 0.2rem; /* override the old margin-top:auto */
+}
+.card__problem {
+  font-size: 1rem;
+}
+.card__problem strong {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-right: 0.4em;
+}
+.card__built {
+  color: var(--ink-soft);
+}
+.card__features {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.98rem;
+}
+.card__features li {
+  position: relative;
+  padding-left: 1.3rem;
+  color: var(--ink-soft);
+}
+.card__features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+.card__actions {
+  margin-top: auto;
+  padding-top: 0.3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+}
+
+/* ---------- Project type badge ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  width: fit-content;
+  padding: 0.18em 0.7em;
+  font-size: 0.8rem;
+  border-radius: 999px;
+  /* never colour alone — the label text always names the type, and each
+     type also gets a distinct dot shape */
+}
+.badge::before {
+  content: "";
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: currentColor;
+}
+.badge--client {
+  color: var(--accent-deep);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.badge--personal {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 9%, transparent);
+}
+.badge--demo {
+  color: #9a7b00;
+  background: color-mix(in srgb, var(--highlight) 40%, transparent);
+}
+.badge--demo::before {
+  border-radius: 2px; /* square dot */
+}
+.badge--concept {
+  color: var(--ink-soft);
+  background: transparent;
+  border: 1.5px dashed var(--line);
+}
+.badge--concept::before {
+  background: transparent;
+  border: 1.5px solid currentColor; /* hollow dot */
+}
+
+/* ---------- ProjectPreview (16:9 screenshot frame) ---------- */
+.preview {
+  margin: 0 0 0.3rem;
+  position: relative;
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  filter: url(#wobble);
+  overflow: hidden;
+}
+/* keep the inner content crisp — only the frame border is wobbled */
+.preview__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  background: var(--paper-2);
+  border-bottom: 2px dashed var(--line);
+}
+.preview__bar span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+}
+.preview__frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--paper) 0,
+    var(--paper) 10px,
+    var(--paper-2) 10px,
+    var(--paper-2) 20px
+  );
+}
+.preview__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.preview__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  text-align: center;
+  padding: 1rem;
+}
+.preview__label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 1rem + 1vw, 1.5rem);
+  color: var(--ink-soft);
+}
+.preview__hint {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: var(--ink-faint);
+  max-width: 30ch;
+}
+
+/* ============================================================
+   PROCESS — four numbered steps
+   ============================================================ */
+.process__grid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.2rem, 2.5vw, 2rem);
+  counter-reset: none;
+}
+.step {
+  position: relative;
+  background: #fffdf6;
+  padding: clamp(1.4rem, 2.5vw, 1.9rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.step::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--sketch-r);
+  filter: url(#wobble);
+  pointer-events: none;
+}
+.step:nth-child(even)::before {
+  border-radius: var(--sketch-r2);
+}
+.step__num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.2rem;
+  line-height: 1;
+  color: var(--accent);
+}
+.step h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.step p {
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+
+/* ============================================================
+   TOOLS — grouped by purpose
+   ============================================================ */
+.tools__groups {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.8rem, 3.5vw, 2.6rem);
+}
+.tools__label {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px dashed var(--line);
+}
+
 /* ============================================================
    RESPONSIVE
    ============================================================ */
@@ -935,6 +1194,9 @@ a {
   }
   .service {
     grid-template-columns: 1fr;
+  }
+  .process__grid {
+    grid-template-columns: repeat(2, 1fr);
   }
   .service__items {
     margin-top: 0.4rem;
@@ -994,6 +1256,9 @@ a {
   /* dividers and the contact form span edge-to-edge cleanly */
   .work__grid {
     gap: 1.6rem;
+  }
+  .process__grid {
+    grid-template-columns: 1fr;
   }
   .about__photo {
     max-width: 100%;

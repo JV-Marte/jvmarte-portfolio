@@ -25,28 +25,51 @@ const kalam = Kalam({
   display: "swap",
 });
 
+const SITE_URL = "https://jvmarteportfolio.com";
+const TITLE = "JV Marte | CRM & Automation Virtual Assistant";
+const DESCRIPTION =
+  "CRM, automation, web, and operations support for service businesses. Explore practical systems, workflow projects, websites, and business tools built by JV Marte.";
+
 export const metadata = {
-  metadataBase: new URL("https://jvmarteportfolio.com"),
-  title: "JV — Virtual Assistant",
-  description:
-    "JV is a virtual assistant for business owners — handling CRM, websites, automation, and bookkeeping so the day-to-day runs without you.",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
   keywords: [
     "virtual assistant",
-    "VA",
+    "CRM virtual assistant",
     "GoHighLevel",
     "CRM setup",
-    "automation",
+    "workflow automation",
+    "Zapier",
+    "n8n",
+    "lead follow-up",
     "web development",
-    "bookkeeping",
-    "freelance",
+    "business operations",
+    "service businesses",
   ],
+  alternates: { canonical: SITE_URL },
+  authors: [{ name: "John Vincent Marte" }],
+  robots: { index: true, follow: true },
   openGraph: {
-    title: "JV — Virtual Assistant",
-    description:
-      "A virtual assistant who handles your CRM, website, automations, and books so you can focus on growth.",
-    url: "https://jvmarteportfolio.com",
-    siteName: "JV Portfolio",
+    title: TITLE,
+    description: DESCRIPTION,
+    url: SITE_URL,
+    siteName: "JV Marte — Portfolio",
     type: "website",
+    images: [
+      {
+        url: "/assets/images/jv-photo.png",
+        width: 520,
+        height: 640,
+        alt: "John Vincent Marte — CRM & Automation Virtual Assistant",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/assets/images/jv-photo.png"],
   },
 };
 
@@ -63,6 +86,43 @@ export default function RootLayout({ children }) {
       className={`${caveat.variable} ${patrick.variable} ${kalam.variable}`}
     >
       <body>
+        {/* Structured data — describes JV as a person offering a
+            professional service, for richer search results. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              name: "JV Marte — CRM & Automation Virtual Assistant",
+              description: DESCRIPTION,
+              url: SITE_URL,
+              image: `${SITE_URL}/assets/images/jv-photo.png`,
+              areaServed: "Worldwide",
+              email: "martejohnvincent13@gmail.com",
+              founder: {
+                "@type": "Person",
+                name: "John Vincent Marte",
+                jobTitle: "CRM & Automation Virtual Assistant",
+                url: SITE_URL,
+                sameAs: [
+                  "https://www.linkedin.com/in/john-vincent-marte-6b1530330/",
+                  "https://www.instagram.com/jvmarte_",
+                  "https://www.facebook.com/JVincent51",
+                ],
+              },
+              knowsAbout: [
+                "CRM setup",
+                "GoHighLevel",
+                "Workflow automation",
+                "Lead follow-up systems",
+                "Web development",
+                "Business operations",
+              ],
+            }),
+          }}
+        />
+
         {/* Hand-drawn wobble filters — applied to box borders so edges look
             sketched while the text inside stays perfectly crisp. */}
         <svg
