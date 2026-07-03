@@ -23,7 +23,7 @@ export default function Home() {
 
             <p className="hero__lede">
               I build practical systems that help small businesses organize
-              leads, automate follow-ups, cut down repetitive admin, and keep
+              leads, automate follow ups, cut down repetitive admin, and keep
               their operations running smoothly.
             </p>
 
@@ -184,7 +184,7 @@ export default function Home() {
                 height={640}
                 className="about__img"
               />
-              <span className="about__caption">JV — CRM &amp; Automation VA</span>
+              <span className="about__caption">JV CRM &amp; Automation VA</span>
             </Reveal>
 
             <div className="about__body">
@@ -194,8 +194,8 @@ export default function Home() {
               </Reveal>
               <Reveal className="prose" delay={80}>
                 <p>
-                  I help service-based businesses organize the messy parts of
-                  their operations — from lead tracking and follow-ups to
+                  I help service based businesses organize the messy parts of
+                  their operations from lead tracking and follow ups to
                   websites, spreadsheets, and repetitive admin tasks.
                 </p>
                 <p>

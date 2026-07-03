@@ -1044,10 +1044,20 @@ a {
   margin: 0 0 0.3rem;
   position: relative;
   background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+/* Wobble only the border on a pseudo-element so a real screenshot inside
+   stays crisp — filtering the whole box displaces the photo pixels. */
+.preview::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   border: 2px solid var(--ink);
   border-radius: 8px;
   filter: url(#wobble);
-  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
 }
 /* keep the inner content crisp — only the frame border is wobbled */
 .preview__bar {
