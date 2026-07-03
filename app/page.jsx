@@ -3,6 +3,7 @@ import Nav from "@/components/Nav";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
 import ProjectPreview from "@/components/ProjectPreview";
+import Gallery from "@/components/Gallery";
 import { services, steps, toolGroups, projects, reasons } from "@/lib/content";
 
 export default function Home() {
@@ -167,6 +168,10 @@ export default function Home() {
                       </a>
                     )}
                   </div>
+
+                  {p.gallery?.length > 0 && (
+                    <Gallery screens={p.gallery} title={p.title} />
+                  )}
                 </Reveal>
               ))}
             </div>
