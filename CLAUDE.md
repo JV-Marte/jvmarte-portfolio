@@ -25,13 +25,23 @@ Live at **https://jvmarteportfolio.com** · repo **JV-Marte/jvmarte-portfolio**.
 
 - `app/layout.jsx` — fonts, `<head>` metadata, and the **global inline SVG
   `<filter>` defs** (`#wobble`, `#wobble-strong`) used for hand-drawn borders.
-- `app/page.jsx` — the whole single-page site (hero, about, services, work,
-  tools, why, contact, footer).
+- `app/page.jsx` — the whole single-page homepage (hero, about, services,
+  process, work, tools, why, contact, footer).
+- `app/work/[slug]/page.jsx` — **case-study pages** (`/work/<slug>`), rendered
+  data-driven from `projects` via `generateStaticParams` + `generateMetadata`.
+  Only projects with `outcomes` get a page (see `lib/content.js`).
 - `app/globals.css` — the entire hand-drawn theme.
 - `app/icon.svg` — favicon (hand-drawn "JV." monogram; Next auto-wires it).
-- `components/` — `Nav.jsx` (sticky nav + mobile off-canvas menu),
-  `Reveal.jsx` (IntersectionObserver fade-in wrapper), `ContactForm.jsx` (EmailJS).
-- `lib/content.js` — **all site copy**: `services`, `tools`, `projects`, `reasons`.
+- `app/robots.js`, `app/sitemap.js` — static robots.txt + sitemap (the sitemap
+  enumerates the case-study routes).
+- `components/` — `Nav.jsx` (sticky nav + mobile off-canvas menu + résumé CTA),
+  `Reveal.jsx` (IntersectionObserver fade-in), `ContactForm.jsx` (EmailJS),
+  `WorkCarousel.jsx` (horizontal snap-scroll project strip), `CopyEmail.jsx`
+  (copy-to-clipboard), `ProjectPreview.jsx` (16:9 image / placeholder),
+  `Gallery.jsx` (lightbox).
+- `lib/content.js` — **all site copy + config**: `site` (contact/résumé/socials),
+  `services`, `steps`, `toolLevels`, `projects`, `reasons`, plus `badgeKey()` /
+  `projectBySlug()` helpers. See `SCREENSHOT_GUIDE.md` for adding images/résumé.
 - `public/assets/` — photo + tool logos. `public/CNAME` (custom domain) and
   `public/.nojekyll` are copied into `out/` on build.
 - `.github/workflows/deploy.yml` — CI build + deploy to GitHub Pages.
@@ -41,10 +51,16 @@ Live at **https://jvmarteportfolio.com** · repo **JV-Marte/jvmarte-portfolio**.
 Prefer editing **`lib/content.js`** — copy is data-driven, so most text/section
 changes need no markup edits. Notable shapes:
 
-- `projects[]`: `{ tag, title, desc, stack[], url? }`. If `url` is present the
-  card renders a **"Visit site →"** link (opens in a new tab); otherwise it
-  renders **"Inquire about this →"** linking to `#contact`.
-- Hero/about/contact copy lives inline in `app/page.jsx`.
+- `projects[]`: `{ slug, type, status, featured, title, problem, built, role[],
+  features[], outcomes[], challenges[], stack[], url?, image?, cta? }`. `featured`
+  projects appear in the homepage carousel; the rest fall to the "Experiments"
+  list. Projects with `outcomes` get a `/work/<slug>` case study. `url` present →
+  card shows **"Visit live website →"** + **"View project breakdown →"**;
+  otherwise the case-study link is primary.
+- `toolLevels[]`: honest proficiency levels (`Primary tools` / `Working
+  knowledge`) — no percentages or progress bars.
+- Hero/about/contact copy lives inline in `app/page.jsx`; shared links + the
+  résumé path live in `site` in `lib/content.js`.
 
 ## Design system (hand-drawn / sketchbook)
 

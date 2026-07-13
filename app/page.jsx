@@ -2,9 +2,20 @@ import Image from "next/image";
 import Nav from "@/components/Nav";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
-import ProjectPreview from "@/components/ProjectPreview";
-import Gallery from "@/components/Gallery";
-import { services, steps, toolGroups, projects, reasons } from "@/lib/content";
+import WorkCarousel from "@/components/WorkCarousel";
+import CopyEmail from "@/components/CopyEmail";
+import {
+  site,
+  services,
+  steps,
+  toolLevels,
+  projects,
+  reasons,
+  badgeKey,
+} from "@/lib/content";
+
+const featuredProjects = projects.filter((p) => p.featured);
+const experiments = projects.filter((p) => !p.featured);
 
 export default function Home() {
   return (
@@ -32,20 +43,76 @@ export default function Home() {
               <a href="#work" className="btn btn--solid">
                 View my work
               </a>
-              <a href="#contact" className="btn btn--ghost">
-                Contact me →
+              <a
+                href={site.resumeUrl}
+                className="btn btn--ghost"
+                target="_blank"
+                rel="noreferrer"
+                download
+              >
+                Download résumé ↓
               </a>
             </div>
 
             <p className="hero__trust">
-              GoHighLevel · Workflow Automation · Web Support · Business
-              Operations
+              GoHighLevel · Google Sheets · Next.js · Supabase
+            </p>
+            <p className="hero__proof">
+              Client work, business systems, and live web projects.
             </p>
           </div>
 
           <div className="hero__rule wrap">
             <span>Available for freelance work</span>
             <span>Remote · Worldwide</span>
+          </div>
+        </section>
+
+        {/* ============== ABOUT ============== */}
+        <section className="section about" id="about">
+          <div className="wrap about__grid">
+            <Reveal className="about__photo">
+              <Image
+                src="/assets/images/jv-photo.png"
+                alt="John Vincent Marte"
+                width={520}
+                height={640}
+                className="about__img"
+              />
+              <span className="about__caption">JV CRM &amp; Automation VA</span>
+            </Reveal>
+
+            <div className="about__body">
+              <p className="eyebrow">About</p>
+              <Reveal as="h2" className="section__title">
+                Hi, I&rsquo;m <em>JV.</em>
+              </Reveal>
+              <Reveal className="prose" delay={80}>
+                <p>
+                  I&rsquo;m a business-minded CRM and automation specialist from
+                  the Philippines. Before working with websites and automation
+                  tools, I ran my own small business &mdash; handling sales,
+                  expenses, inventory, customer communication, and day-to-day
+                  operations.
+                </p>
+                <p>
+                  That taught me businesses rarely need more complicated
+                  software. They need systems that are{" "}
+                  <strong>clear, practical, and easy to maintain.</strong> Today
+                  I build CRM pipelines, follow-up workflows, websites,
+                  dashboards, and spreadsheet systems that reduce repetitive
+                  work and keep operations organized.
+                </p>
+                <p>
+                  My strongest tools are GoHighLevel, Google Sheets, Next.js,
+                  and Supabase, backed by a foundation in business finance and
+                  bookkeeping.
+                </p>
+              </Reveal>
+              <a href="#contact" className="link-arrow">
+                Work with me →
+              </a>
+            </div>
           </div>
         </section>
 
@@ -108,117 +175,37 @@ export default function Home() {
                 Systems I&rsquo;ve <em>built.</em>
               </h2>
               <p className="section__intro">
-                A selection of CRM systems, automation workflows, websites, and
-                operational tools I&rsquo;ve built or developed as practical
-                projects. Each card is labelled so you can see what kind of
-                project it is.
+                Real client work, live web apps, and business systems. Each
+                card shows the project type, my role, and the tools used &mdash;
+                open a breakdown to see the problem, what I built, and the
+                outcome.
               </p>
             </header>
 
-            <div className="work__grid">
-              {projects.map((p, i) => (
-                <Reveal
-                  as="article"
-                  key={p.title}
-                  className="card"
-                  delay={(i % 2) * 80}
-                >
-                  <ProjectPreview
-                    src={p.image}
-                    alt={`${p.title} project preview`}
-                  />
+            <WorkCarousel projects={featuredProjects} />
 
-                  <span className={`card__tag badge badge--${badgeKey(p.type)}`}>
-                    {p.type}
-                  </span>
-                  <h3>{p.title}</h3>
-
-                  <p className="card__problem">
-                    <strong>Problem</strong> {p.problem}
-                  </p>
-                  <p className="card__built">{p.built}</p>
-
-                  {p.features?.length > 0 && (
-                    <ul className="card__features">
-                      {p.features.map((f) => (
-                        <li key={f}>{f}</li>
-                      ))}
-                    </ul>
-                  )}
-
-                  <ul className="card__stack" aria-label="Tools used">
-                    {p.stack.map((t) => (
-                      <li key={t}>{t}</li>
-                    ))}
-                  </ul>
-
-                  <div className="card__actions">
-                    {p.url ? (
-                      <a
-                        href={p.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="link-arrow link-arrow--sm"
+            {experiments.length > 0 && (
+              <div className="experiments">
+                <h3 className="experiments__title">
+                  Experiments &amp; practice builds
+                </h3>
+                <ul className="experiments__list">
+                  {experiments.map((p) => (
+                    <li key={p.slug} className="experiments__item">
+                      <span
+                        className={`badge badge--${badgeKey(p.type)}`}
                       >
-                        {p.cta || "Visit website"} →
-                      </a>
-                    ) : (
-                      <a href="#contact" className="link-arrow link-arrow--sm">
-                        {p.cta || "Discuss a build like this"} →
-                      </a>
-                    )}
-                  </div>
-
-                  {p.gallery?.length > 0 && (
-                    <Gallery screens={p.gallery} title={p.title} />
-                  )}
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ============== ABOUT ============== */}
-        <section className="section about" id="about">
-          <div className="wrap about__grid">
-            <Reveal className="about__photo">
-              <Image
-                src="/assets/images/jv-photo.png"
-                alt="John Vincent Marte"
-                width={520}
-                height={640}
-                className="about__img"
-              />
-              <span className="about__caption">JV CRM &amp; Automation VA</span>
-            </Reveal>
-
-            <div className="about__body">
-              <p className="eyebrow">About</p>
-              <Reveal as="h2" className="section__title">
-                Hi, I&rsquo;m <em>JV.</em>
-              </Reveal>
-              <Reveal className="prose" delay={80}>
-                <p>
-                  I help service based businesses organize the messy parts of
-                  their operations from lead tracking and follow ups to
-                  websites, spreadsheets, and repetitive admin tasks.
-                </p>
-                <p>
-                  My background in <strong>business finance and operations</strong>
-                  &nbsp;helps me understand both the technical side of a system
-                  and the business reason behind it. I focus on building
-                  practical solutions that are easy to understand, maintain, and
-                  use.
-                </p>
-                <p>
-                  I&rsquo;m continuously improving my skills across CRM
-                  platforms, automation, web development, and business systems.
-                </p>
-              </Reveal>
-              <a href="#contact" className="link-arrow">
-                Work with me →
-              </a>
-            </div>
+                        {p.type}
+                      </span>
+                      <div>
+                        <h4>{p.title}</h4>
+                        <p>{p.built}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </section>
 
@@ -231,14 +218,14 @@ export default function Home() {
                 Chosen for the <em>job at hand.</em>
               </h2>
               <p className="section__intro">
-                I pick tools based on the business problem in front of me, not
-                to pad a list. These are the ones I reach for most, grouped by
-                what they&rsquo;re for.
+                Grouped by how much I actually use them &mdash; honest levels,
+                no percentages or progress bars. I&rsquo;d rather be solid on a
+                few tools than list every logo.
               </p>
             </header>
 
             <div className="tools__groups">
-              {toolGroups.map((group, i) => (
+              {toolLevels.map((group, i) => (
                 <Reveal
                   as="div"
                   key={group.label}
@@ -246,13 +233,19 @@ export default function Home() {
                   delay={i * 60}
                 >
                   <h3 className="tools__label">{group.label}</h3>
+                  {group.note && <p className="tools__note">{group.note}</p>}
                   <ul className="tools__grid">
                     {group.tools.map((t) => (
                       <li key={t.name} className="tool">
                         {t.img && (
                           <img src={t.img} alt="" aria-hidden="true" loading="lazy" />
                         )}
-                        <span>{t.name}</span>
+                        <span className="tool__body">
+                          <span className="tool__name">{t.name}</span>
+                          {t.desc && (
+                            <span className="tool__desc">{t.desc}</span>
+                          )}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -290,58 +283,60 @@ export default function Home() {
             <div className="contact__left">
               <p className="eyebrow">Get in touch</p>
               <h2 className="contact__title">
-                Let&rsquo;s make your workflow <em>simpler.</em>
+                Looking for a CRM, automation, or operations <em>VA?</em>
               </h2>
               <p className="prose">
-                Need help organizing leads, automating repetitive work,
-                improving a website, or building a practical business system?
-                Send me a message and tell me what currently takes too much of
-                your time.
+                I&rsquo;m available for remote roles, project-based work, and
+                paid trial tasks. Tell me what currently takes too much of your
+                time and I&rsquo;ll reply within 24 hours.
               </p>
+
+              <div className="contact__cta-row">
+                <a
+                  href={site.resumeUrl}
+                  className="btn btn--solid"
+                  target="_blank"
+                  rel="noreferrer"
+                  download
+                >
+                  Download résumé ↓
+                </a>
+                <CopyEmail email={site.email} />
+              </div>
 
               <ul className="contact__meta">
                 <li>
                   <span>Email</span>
-                  <a href="mailto:martejohnvincent13@gmail.com">
-                    martejohnvincent13@gmail.com
-                  </a>
+                  <a href={`mailto:${site.email}`}>{site.email}</a>
                 </li>
                 <li>
                   <span>Book a call</span>
-                  <a
-                    href="https://calendly.com/martejohnvincent13/30min"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                  <a href={site.calendly} target="_blank" rel="noreferrer">
                     calendly.com/…/30min
                   </a>
                 </li>
+                {site.onlineJobs && (
+                  <li>
+                    <span>OnlineJobs.ph</span>
+                    <a href={site.onlineJobs} target="_blank" rel="noreferrer">
+                      View profile
+                    </a>
+                  </li>
+                )}
                 <li>
                   <span>Status</span>
-                  <em>Available for new projects</em>
+                  <em>Open to remote roles &amp; projects</em>
                 </li>
               </ul>
 
               <div className="socials">
-                <a
-                  href="https://www.linkedin.com/in/john-vincent-marte-6b1530330/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href={site.linkedin} target="_blank" rel="noreferrer">
                   LinkedIn
                 </a>
-                <a
-                  href="https://www.instagram.com/jvmarte_"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href={site.instagram} target="_blank" rel="noreferrer">
                   Instagram
                 </a>
-                <a
-                  href="https://www.facebook.com/JVincent51"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href={site.facebook} target="_blank" rel="noreferrer">
                   Facebook
                 </a>
               </div>
@@ -368,10 +363,4 @@ export default function Home() {
       </footer>
     </>
   );
-}
-
-// Maps a project type to a css modifier so each badge reads distinctly
-// (shape + label, never colour alone).
-function badgeKey(type = "") {
-  return type.toLowerCase().split(" ")[0]; // "client" | "personal" | "demo" | "concept"
 }

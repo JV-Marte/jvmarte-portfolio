@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { site } from "@/lib/content";
 
 const links = [
-  { href: "#services", label: "Services" },
   { href: "#work", label: "Work" },
+  { href: "#services", label: "Services" },
   { href: "#about", label: "About" },
   { href: "#tools", label: "Tools" },
+  { href: "#contact", label: "Contact" },
 ];
 
 // section ids tracked for the active-link underline (in document order)
@@ -77,8 +79,15 @@ export default function Nav() {
               </a>
             );
           })}
-          <a href="#contact" className="nav__cta" onClick={() => setOpen(false)}>
-            Contact me
+          <a
+            href={site.resumeUrl}
+            className="nav__cta"
+            target="_blank"
+            rel="noreferrer"
+            download
+            onClick={() => setOpen(false)}
+          >
+            Résumé ↓
           </a>
         </nav>
 

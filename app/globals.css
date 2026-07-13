@@ -563,10 +563,79 @@ a {
 /* ============================================================
    WORK — pinned index cards
    ============================================================ */
-.work__grid {
+/* Horizontal, snap-scrolling strip. The carousel wrapper is positioned so the
+   prev/next arrows can sit in the page gutter beside the scroller. */
+.work__carousel {
+  position: relative;
+  --card-gap: clamp(1.5rem, 3vw, 2.4rem);
+}
+.work__scroller {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--card-gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0.5rem;
+  -webkit-overflow-scrolling: touch; /* momentum scroll on iOS */
+  /* Room for the push-pins (top), rotation, and hover lift + shadow (bottom).
+     overflow-x:auto clips the other axis too, so this padding keeps them
+     from being cut off. */
+  padding: 1rem 0.5rem 2.75rem;
+  /* Hide the scrollbar but keep it scrollable. */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* old Edge/IE */
+}
+.work__scroller::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+/* ~2 cards visible on desktop/tablet; cards never shrink. */
+.work__scroller > .card {
+  flex: 0 0 calc((100% - var(--card-gap)) / 2);
+  scroll-snap-align: start;
+}
+
+/* Subtle sketched nav arrows — desktop only (hidden on touch/small screens). */
+.work__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 46px;
+  height: 46px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(1.5rem, 3vw, 2.4rem);
+  place-items: center;
+  background: #fffdf6;
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+.work__arrow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: #fffdf6;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--sketch-r);
+  filter: url(#wobble);
+}
+.work__arrow--prev {
+  left: -1.4rem;
+}
+.work__arrow--next {
+  right: -1.4rem;
+  border-radius: var(--sketch-r2);
+}
+.work__arrow:hover:not(:disabled) {
+  transform: translateY(-50%) scale(1.08) rotate(-2deg);
+}
+.work__arrow:disabled {
+  opacity: 0;
+  pointer-events: none;
 }
 .card {
   position: relative;
@@ -757,6 +826,20 @@ a {
 }
 .contact .eyebrow::before {
   background: #ffe27a;
+}
+/* Buttons on the dark chalkboard: the section flips --ink to a light tone,
+   which would render a solid button light-on-light. Force an accent-blue
+   fill + white text (covers the résumé CTA and the form's send button), and
+   keep the ghost button's yellow hover legible with dark text. */
+.contact .btn--solid {
+  color: #fff;
+}
+.contact .btn--solid::before {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.contact .btn--ghost:hover {
+  color: #29302b;
 }
 .contact__grid {
   display: grid;
@@ -1037,6 +1120,99 @@ a {
 .badge--concept::before {
   background: transparent;
   border: 1.5px solid currentColor; /* hollow dot */
+}
+
+/* ---------- Card: role line + live indicator ---------- */
+.card__role {
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+}
+.card__role strong {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-right: 0.4em;
+}
+.card__live {
+  color: #2e7d46;
+  font-weight: 700;
+}
+
+/* ---------- Hero proof line ---------- */
+.hero__proof {
+  margin-top: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Experiments & practice builds ---------- */
+.experiments {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding-top: 1.6rem;
+  border-top: 2px dashed var(--line);
+}
+.experiments__title {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+.experiments__list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+.experiments__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+.experiments__item h4 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1.1;
+}
+.experiments__item p {
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  max-width: 60ch;
+}
+
+/* ---------- Tools: proficiency notes + descriptions ---------- */
+.tools__note {
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+  margin: -0.4rem 0 0.9rem;
+}
+.tool__body {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+.tool__name {
+  font-size: 1rem;
+}
+.tool__desc {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Contact CTA row (résumé + copy email) ---------- */
+.contact__cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin: 1.4rem 0 0.4rem;
 }
 
 /* ---------- ProjectPreview (16:9 screenshot frame) ---------- */
@@ -1348,6 +1524,98 @@ a {
 }
 
 /* ============================================================
+   CASE STUDY PAGE (/work/[slug])
+   ============================================================ */
+.case {
+  padding-top: clamp(6rem, 12vh, 8rem);
+  padding-bottom: clamp(3rem, 8vw, 6rem);
+}
+.case__inner {
+  max-width: 820px;
+}
+.case__back {
+  display: inline-block;
+  margin-bottom: 1.4rem;
+}
+.case__head {
+  margin-bottom: 1.6rem;
+}
+.case__tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+.case__status {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+.case__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 1.6rem + 3vw, 3.6rem);
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+.case__lede {
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  max-width: 62ch;
+}
+.case__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.3rem;
+}
+.case__body {
+  margin-top: clamp(1.6rem, 4vw, 2.6rem);
+  display: grid;
+  gap: clamp(1.6rem, 3vw, 2.2rem);
+}
+.case__section h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 1.2rem + 1vw, 2rem);
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+.case__section p {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  max-width: 66ch;
+}
+.case__list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  max-width: 66ch;
+}
+.case__list li {
+  position: relative;
+  padding-left: 1.4rem;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+.case__list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+.case__stack {
+  margin-top: 0;
+}
+.case__private {
+  font-style: italic;
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 880px) {
@@ -1359,8 +1627,9 @@ a {
   .about__photo {
     max-width: 360px;
   }
-  .work__grid {
-    grid-template-columns: 1fr;
+  /* Arrows are a desktop affordance — touch users swipe instead. */
+  .work__arrow {
+    display: none;
   }
   .service {
     grid-template-columns: 1fr;
@@ -1405,6 +1674,13 @@ a {
     flex-direction: column;
     gap: 0.4rem;
   }
+  /* Show ~85% of one card so the next card clearly peeks — a swipe hint. */
+  .work__carousel {
+    --card-gap: 1rem;
+  }
+  .work__scroller > .card {
+    flex-basis: 85%;
+  }
 }
 
 @media (max-width: 540px) {
@@ -1424,9 +1700,6 @@ a {
     font-size: clamp(2rem, 8.5vw, 2.6rem);
   }
   /* dividers and the contact form span edge-to-edge cleanly */
-  .work__grid {
-    gap: 1.6rem;
-  }
   .process__grid {
     grid-template-columns: 1fr;
   }
