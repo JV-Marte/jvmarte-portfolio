@@ -11,7 +11,7 @@ assets in over time.
 - Set `image: null` (or omit) to show the labelled placeholder instead.
 - `imagePosition: "top"` (optional) controls framing for tall dashboards.
 - Optional `gallery: [{ src, label }]` renders a thumbnail strip + lightbox on
-  the card and the case-study page.
+  the case-study page.
 
 To add a screenshot: drop the file in `public/assets/images/`, then point the
 project's `image` (or `gallery`) at it. That's it.

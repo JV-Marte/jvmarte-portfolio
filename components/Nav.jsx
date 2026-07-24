@@ -3,16 +3,16 @@
 import { useEffect, useRef, useState } from "react";
 import { site } from "@/lib/content";
 
+// "/#section" hrefs work from the homepage AND from /work/[slug] pages.
 const links = [
-  { href: "#work", label: "Work" },
-  { href: "#services", label: "Services" },
-  { href: "#about", label: "About" },
-  { href: "#tools", label: "Tools" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#services", label: "Services" },
+  { href: "/#work", label: "Work" },
+  { href: "/#tools", label: "Toolbox" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 // section ids tracked for the active-link underline (in document order)
-const sectionIds = ["home", "services", "process", "work", "about", "tools", "contact"];
+const sectionIds = ["home", "services", "work", "tools", "contact"];
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -55,7 +55,7 @@ export default function Nav() {
     <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
       <div className="nav__inner">
         <a href="#top" className="nav__logo" onClick={() => setOpen(false)}>
-          JV<span>.</span>
+          JV<span>.</span>Marte
         </a>
 
         <nav
@@ -64,7 +64,7 @@ export default function Nav() {
           aria-label="Primary"
         >
           {links.map((l, i) => {
-            const id = l.href.slice(1);
+            const id = l.href.split("#")[1];
             const isActive = active === id;
             return (
               <a
@@ -80,14 +80,13 @@ export default function Nav() {
             );
           })}
           <a
-            href={site.resumeUrl}
+            href={site.calendly}
             className="nav__cta"
             target="_blank"
             rel="noreferrer"
-            download
             onClick={() => setOpen(false)}
           >
-            Résumé ↓
+            Book a call
           </a>
         </nav>
 

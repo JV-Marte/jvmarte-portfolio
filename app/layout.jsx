@@ -1,51 +1,35 @@
-import { Caveat, Patrick_Hand, Kalam } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-// Loose handwriting for big display headlines (the "marker" voice)
-const caveat = Caveat({
+// One typeface, weight-driven hierarchy: Inter for everything.
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-// Neat printed handwriting for body copy — very legible
-const patrick = Patrick_Hand({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-// Slightly scratchier hand for labels / tags
-const kalam = Kalam({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-mono",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-sans",
   display: "swap",
 });
 
 const SITE_URL = "https://jvmarteportfolio.com";
-const TITLE = "JV Marte | CRM & Automation Virtual Assistant";
+const TITLE = "JV Marte | Web Developer, Designer & Automation Specialist";
 const DESCRIPTION =
-  "CRM, automation, web, and operations support for service businesses. Explore practical systems, workflow projects, websites, and business tools built by JV Marte.";
+  "I design and build websites, set up automations, and handle the business support behind them. Live projects, honest tooling, based in the Philippines and working worldwide.";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: TITLE,
   description: DESCRIPTION,
   keywords: [
-    "virtual assistant",
-    "CRM virtual assistant",
-    "GoHighLevel",
-    "CRM setup",
+    "web developer",
+    "web design",
+    "Next.js developer",
     "workflow automation",
     "Zapier",
     "n8n",
-    "lead follow-up",
-    "web development",
-    "business operations",
-    "service businesses",
+    "GoHighLevel",
+    "virtual assistant",
+    "business support",
+    "bookkeeping support",
+    "small business websites",
   ],
   alternates: { canonical: SITE_URL },
   authors: [{ name: "John Vincent Marte" }],
@@ -54,14 +38,14 @@ export const metadata = {
     title: TITLE,
     description: DESCRIPTION,
     url: SITE_URL,
-    siteName: "JV Marte — Portfolio",
+    siteName: "JV Marte · Portfolio",
     type: "website",
     images: [
       {
         url: "/assets/images/jv-photo.png",
         width: 520,
         height: 640,
-        alt: "John Vincent Marte — CRM & Automation Virtual Assistant",
+        alt: "John Vincent Marte, Web Developer, Designer & Automation Specialist",
       },
     ],
   },
@@ -74,17 +58,14 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: "#f7f4ea",
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={`${caveat.variable} ${patrick.variable} ${kalam.variable}`}
-    >
+    <html lang="en" className={inter.variable}>
       <body>
         {/* Structured data — describes JV as a person offering a
             professional service, for richer search results. */}
@@ -94,7 +75,7 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
-              name: "JV Marte — CRM & Automation Virtual Assistant",
+              name: "JV Marte · Web Development, Design & Automation",
               description: DESCRIPTION,
               url: SITE_URL,
               image: `${SITE_URL}/assets/images/jv-photo.png`,
@@ -103,7 +84,7 @@ export default function RootLayout({ children }) {
               founder: {
                 "@type": "Person",
                 name: "John Vincent Marte",
-                jobTitle: "CRM & Automation Virtual Assistant",
+                jobTitle: "Web Developer, Designer & Automation Specialist",
                 url: SITE_URL,
                 sameAs: [
                   "https://www.linkedin.com/in/john-vincent-marte-6b1530330/",
@@ -112,43 +93,16 @@ export default function RootLayout({ children }) {
                 ],
               },
               knowsAbout: [
-                "CRM setup",
-                "GoHighLevel",
-                "Workflow automation",
-                "Lead follow-up systems",
                 "Web development",
+                "Web design",
+                "Next.js",
+                "Workflow automation",
+                "GoHighLevel",
                 "Business operations",
               ],
             }),
           }}
         />
-
-        {/* Hand-drawn wobble filters — applied to box borders so edges look
-            sketched while the text inside stays perfectly crisp. */}
-        <svg
-          aria-hidden="true"
-          focusable="false"
-          style={{ position: "absolute", width: 0, height: 0 }}
-        >
-          <filter id="wobble">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.018"
-              numOctaves="3"
-              result="noise"
-            />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
-          </filter>
-          <filter id="wobble-strong">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.012"
-              numOctaves="2"
-              result="noise"
-            />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
-          </filter>
-        </svg>
         {children}
       </body>
     </html>

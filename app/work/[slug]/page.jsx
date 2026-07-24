@@ -17,7 +17,7 @@ export function generateMetadata({ params }) {
   const p = projectBySlug(params.slug);
   if (!p) return {};
   const url = `https://jvmarteportfolio.com/work/${p.slug}/`;
-  const title = `${p.title} — Case Study | JV Marte`;
+  const title = `${p.title} · Case study | JV Marte`;
   const description = p.problem;
   return {
     title,
@@ -158,7 +158,7 @@ export default function CaseStudy({ params }) {
                 </p>
               ) : (
                 <p className="case__private">
-                  Private project — details available upon request.
+                  Private build. Ask me for a walkthrough.
                 </p>
               )}
               <p>
@@ -174,7 +174,7 @@ export default function CaseStudy({ params }) {
       <footer className="footer">
         <div className="wrap footer__inner">
           <a href="/#top" className="nav__logo">
-            JV<span>.</span>
+            JV<span>.</span>Marte
           </a>
           <p>© {new Date().getFullYear()} {site.name}</p>
           <a href="/#contact" className="link-arrow link-arrow--sm">

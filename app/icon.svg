@@ -1,14 +1,12 @@
 <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <!-- paper tile (matches the site background) -->
-  <rect x="2" y="2" width="60" height="60" rx="14" fill="#f7f4ea" stroke="#2a2724" stroke-width="3"/>
-  <!-- hand-lettered "JV." monogram, leaning like the Caveat logo -->
-  <g fill="none" stroke="#2a2724" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" transform="rotate(-9 32 34)">
-    <!-- J: short left serif + stem curling into a deep bottom hook -->
-    <path d="M19 15 H28"/>
-    <path d="M27 15 V35 C27 50 14 53 8 43"/>
+  <!-- blue tile matching the site accent -->
+  <rect width="64" height="64" rx="14" fill="#2563eb"/>
+  <!-- "JV" monogram -->
+  <g fill="none" stroke="#ffffff" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- J -->
+    <path d="M18 16 H29"/>
+    <path d="M26 16 V36 C26 45 17 47 12 42"/>
     <!-- V -->
-    <path d="M34 18 L43 50 L53 18"/>
+    <path d="M34 16 L43 48 L52 16"/>
   </g>
-  <!-- accent dot -->
-  <circle cx="54" cy="48" r="4.4" fill="#2f5ad0"/>
 </svg>

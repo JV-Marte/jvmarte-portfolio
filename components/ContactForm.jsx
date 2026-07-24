@@ -26,7 +26,7 @@ export default function ContactForm() {
 
     try {
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, params, { publicKey: PUBLIC_KEY });
-      setStatus({ state: "ok", msg: "Message sent — I'll reply within 24 hours." });
+      setStatus({ state: "ok", msg: "Message sent. I usually reply within a day." });
       form.reset();
     } catch {
       setStatus({
@@ -57,9 +57,10 @@ export default function ContactForm() {
           <option value="" disabled>
             Select a service…
           </option>
-          <option>CRM &amp; Lead Management</option>
-          <option>Workflow Automation</option>
-          <option>Web &amp; Operations Support</option>
+          <option>Web development</option>
+          <option>Web design</option>
+          <option>Automation</option>
+          <option>Business support</option>
           <option>Other / Not sure yet</option>
         </select>
       </label>

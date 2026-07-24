@@ -2,20 +2,12 @@ import Image from "next/image";
 import Nav from "@/components/Nav";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
-import WorkCarousel from "@/components/WorkCarousel";
+import WorkGrid from "@/components/WorkGrid";
 import CopyEmail from "@/components/CopyEmail";
-import {
-  site,
-  services,
-  steps,
-  toolLevels,
-  projects,
-  reasons,
-  badgeKey,
-} from "@/lib/content";
+import { site, services, toolLevels, projects, badgeKey } from "@/lib/content";
 
 const featuredProjects = projects.filter((p) => p.featured);
-const experiments = projects.filter((p) => !p.featured);
+const moreBuilds = projects.filter((p) => !p.featured);
 
 export default function Home() {
   return (
@@ -27,112 +19,71 @@ export default function Home() {
         {/* ============== HERO ============== */}
         <section className="hero" id="home">
           <div className="wrap hero__inner">
-            <p className="eyebrow">CRM, Automation &amp; Operations Support</p>
+            <div className="hero__copy">
+              <p className="hero__badge">
+                <span className="hero__badge-dot" aria-hidden="true" />
+                Available for new projects
+              </p>
 
-            <h1 className="hero__title">
-              CRM &amp; automation support for <em>service businesses.</em>
-            </h1>
+              <h1 className="hero__title">
+                Hi, I&rsquo;m JV. I build websites and{" "}
+                <em>keep your business running.</em>
+              </h1>
 
-            <p className="hero__lede">
-              I build practical systems that help small businesses organize
-              leads, automate follow ups, cut down repetitive admin, and keep
-              their operations running smoothly.
-            </p>
+              <p className="hero__lede">
+                I design and build fast, credible sites for small businesses. I
+                also set up automations that handle the repetitive work, and I
+                look after the admin behind the scenes, from CRM records to
+                clean books.
+              </p>
 
-            <div className="hero__actions">
-              <a href="#work" className="btn btn--solid">
-                View my work
-              </a>
-              <a
-                href={site.resumeUrl}
-                className="btn btn--ghost"
-                target="_blank"
-                rel="noreferrer"
-                download
-              >
-                Download résumé ↓
-              </a>
+              <div className="hero__actions">
+                <a href="#contact" className="btn btn--solid">
+                  Get in touch
+                </a>
+                <a href="#work" className="btn btn--ghost">
+                  See my work ↓
+                </a>
+              </div>
+
+              <p className="hero__trust">
+                Next.js · GoHighLevel · Zapier · Supabase · Google Sheets
+              </p>
             </div>
 
-            <p className="hero__trust">
-              GoHighLevel · Google Sheets · Next.js · Supabase
-            </p>
-            <p className="hero__proof">
-              Client work, business systems, and live web projects.
-            </p>
-          </div>
-
-          <div className="hero__rule wrap">
-            <span>Available for freelance work</span>
-            <span>Remote · Worldwide</span>
-          </div>
-        </section>
-
-        {/* ============== ABOUT ============== */}
-        <section className="section about" id="about">
-          <div className="wrap about__grid">
-            <Reveal className="about__photo">
+            <div className="hero__photo">
               <Image
                 src="/assets/images/jv-photo.png"
                 alt="John Vincent Marte"
                 width={520}
                 height={640}
-                className="about__img"
+                priority
+                className="hero__img"
               />
-              <span className="about__caption">JV CRM &amp; Automation VA</span>
-            </Reveal>
-
-            <div className="about__body">
-              <p className="eyebrow">About</p>
-              <Reveal as="h2" className="section__title">
-                Hi, I&rsquo;m <em>JV.</em>
-              </Reveal>
-              <Reveal className="prose" delay={80}>
-                <p>
-                  I&rsquo;m a business-minded CRM and automation specialist from
-                  the Philippines. Before working with websites and automation
-                  tools, I ran my own small business &mdash; handling sales,
-                  expenses, inventory, customer communication, and day-to-day
-                  operations.
-                </p>
-                <p>
-                  That taught me businesses rarely need more complicated
-                  software. They need systems that are{" "}
-                  <strong>clear, practical, and easy to maintain.</strong> Today
-                  I build CRM pipelines, follow-up workflows, websites,
-                  dashboards, and spreadsheet systems that reduce repetitive
-                  work and keep operations organized.
-                </p>
-                <p>
-                  My strongest tools are GoHighLevel, Google Sheets, Next.js,
-                  and Supabase, backed by a foundation in business finance and
-                  bookkeeping.
-                </p>
-              </Reveal>
-              <a href="#contact" className="link-arrow">
-                Work with me →
-              </a>
             </div>
           </div>
         </section>
 
         {/* ============== SERVICES ============== */}
-        <section className="section services" id="services">
+        <section className="section section--alt" id="services">
           <div className="wrap">
             <header className="section__head">
-              <p className="eyebrow">What I do</p>
+              <p className="eyebrow">Services</p>
               <h2 className="section__title">
-                Systems that take work <em>off your plate.</em>
+                What I can take <em>off your plate.</em>
               </h2>
+              <p className="section__intro">
+                Four areas, set up properly and documented, so anyone on your
+                team can run them after handover.
+              </p>
             </header>
 
-            <ul className="services__list">
+            <ul className="services__grid">
               {services.map((s, i) => (
                 <Reveal as="li" key={s.n} className="service" delay={i * 60}>
-                  <div className="service__main">
-                    <h3>{s.title}</h3>
-                    <p>{s.blurb}</p>
-                  </div>
+                  <span className="service__num">{s.n}</span>
+                  <h3>{s.title}</h3>
+                  <p>{s.blurb}</p>
                   <ul className="service__items">
                     {s.items.map((it) => (
                       <li key={it}>{it}</li>
@@ -144,64 +95,43 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ============== PROCESS ============== */}
-        <section className="section process" id="process">
-          <div className="wrap">
-            <header className="section__head">
-              <p className="eyebrow">How I work</p>
-              <h2 className="section__title">
-                A simple, repeatable <em>process.</em>
-              </h2>
-            </header>
-
-            <ol className="process__grid">
-              {steps.map((step, i) => (
-                <Reveal as="li" key={step.n} className="step" delay={i * 60}>
-                  <span className="step__num">{step.n}</span>
-                  <h3>{step.title}</h3>
-                  <p>{step.body}</p>
-                </Reveal>
-              ))}
-            </ol>
-          </div>
-        </section>
-
         {/* ============== WORK ============== */}
-        <section className="section work" id="work">
+        <section className="section" id="work">
           <div className="wrap">
             <header className="section__head">
-              <p className="eyebrow">Selected work &amp; system builds</p>
+              <p className="eyebrow">Selected work</p>
               <h2 className="section__title">
-                Systems I&rsquo;ve <em>built.</em>
+                Real projects, <em>live right now.</em>
               </h2>
               <p className="section__intro">
-                Real client work, live web apps, and business systems. Each
-                card shows the project type, my role, and the tools used &mdash;
-                open a breakdown to see the problem, what I built, and the
-                outcome.
+                Storefronts, booking systems, dashboards, and CRM automations.
+                Every card links to a breakdown of the problem, the build, and
+                the outcome.
               </p>
             </header>
 
-            <WorkCarousel projects={featuredProjects} />
+            <WorkGrid projects={featuredProjects} />
 
-            {experiments.length > 0 && (
-              <div className="experiments">
-                <h3 className="experiments__title">
-                  Experiments &amp; practice builds
-                </h3>
-                <ul className="experiments__list">
-                  {experiments.map((p) => (
-                    <li key={p.slug} className="experiments__item">
-                      <span
-                        className={`badge badge--${badgeKey(p.type)}`}
-                      >
+            {moreBuilds.length > 0 && (
+              <div className="more">
+                <h3 className="more__title">More builds</h3>
+                <ul className="more__list">
+                  {moreBuilds.map((p, i) => (
+                    <Reveal as="li" key={p.slug} className="more__item" delay={i * 60}>
+                      <span className={`badge badge--${badgeKey(p.type)}`}>
                         {p.type}
                       </span>
-                      <div>
-                        <h4>{p.title}</h4>
-                        <p>{p.built}</p>
-                      </div>
-                    </li>
+                      <h4>{p.title}</h4>
+                      <p>{p.blurb}</p>
+                      {p.outcomes?.length > 0 && (
+                        <a
+                          href={`/work/${p.slug}/`}
+                          className="link-arrow link-arrow--sm"
+                        >
+                          Case study →
+                        </a>
+                      )}
+                    </Reveal>
                   ))}
                 </ul>
               </div>
@@ -209,141 +139,101 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ============== TOOLS ============== */}
-        <section className="section tools" id="tools">
+        {/* ============== TOOLBOX ============== */}
+        <section className="section section--alt" id="tools">
           <div className="wrap">
             <header className="section__head">
-              <p className="eyebrow">Tools I use</p>
-              <h2 className="section__title">
-                Chosen for the <em>job at hand.</em>
-              </h2>
-              <p className="section__intro">
-                Grouped by how much I actually use them &mdash; honest levels,
-                no percentages or progress bars. I&rsquo;d rather be solid on a
-                few tools than list every logo.
-              </p>
+              <p className="eyebrow">Toolbox</p>
+              <h2 className="section__title">Tools I reach for.</h2>
             </header>
 
-            <div className="tools__groups">
+            <div className="toolbox__groups">
               {toolLevels.map((group, i) => (
-                <Reveal
-                  as="div"
-                  key={group.label}
-                  className="tools__group"
-                  delay={i * 60}
-                >
-                  <h3 className="tools__label">{group.label}</h3>
-                  {group.note && <p className="tools__note">{group.note}</p>}
-                  <ul className="tools__grid">
+                <Reveal as="div" key={group.label} delay={i * 60}>
+                  <h3 className="toolbox__label">{group.label}</h3>
+                  <ul className="toolbox__chips">
                     {group.tools.map((t) => (
-                      <li key={t.name} className="tool">
-                        {t.img && (
-                          <img src={t.img} alt="" aria-hidden="true" loading="lazy" />
-                        )}
-                        <span className="tool__body">
-                          <span className="tool__name">{t.name}</span>
-                          {t.desc && (
-                            <span className="tool__desc">{t.desc}</span>
-                          )}
-                        </span>
+                      <li
+                        key={t.name}
+                        className={`chip ${i === 0 ? "chip--primary" : ""}`}
+                      >
+                        {t.name}
                       </li>
                     ))}
                   </ul>
                 </Reveal>
               ))}
             </div>
+
+            <p className="toolbox__note">
+              No skill bars or percentages, just an honest split by how often I
+              use them.
+            </p>
           </div>
         </section>
 
-        {/* ============== WHY ME ============== */}
-        <section className="section why">
-          <div className="wrap why__grid">
-            <div className="why__intro">
-              <p className="eyebrow">Why work with me</p>
-              <h2 className="section__title">
-                Practical, honest, <em>easy to work with.</em>
-              </h2>
-            </div>
-            <ul className="why__list">
-              {reasons.map((r, i) => (
-                <Reveal as="li" key={r.title} className="why__item" delay={i * 60}>
-                  <div>
-                    <h3>{r.title}</h3>
-                    <p>{r.body}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </ul>
-          </div>
-        </section>
+        {/* ============== CONTACT ============== */}
+        <section className="section" id="contact">
+          <div className="wrap">
+            <div className="contact__panel">
+              <div className="contact__left">
+                <p className="eyebrow">Get in touch</p>
+                <h2 className="contact__title">
+                  Tell me what&rsquo;s <em>eating your week.</em>
+                </h2>
+                <p className="prose">
+                  Whether it&rsquo;s a website that needs building or busywork
+                  that should run itself, send me a note. I read everything and
+                  usually reply within a day.
+                </p>
 
-        {/* ============== CTA + CONTACT ============== */}
-        <section className="section contact" id="contact">
-          <div className="wrap contact__grid">
-            <div className="contact__left">
-              <p className="eyebrow">Get in touch</p>
-              <h2 className="contact__title">
-                Looking for a CRM, automation, or operations <em>VA?</em>
-              </h2>
-              <p className="prose">
-                I&rsquo;m available for remote roles, project-based work, and
-                paid trial tasks. Tell me what currently takes too much of your
-                time and I&rsquo;ll reply within 24 hours.
-              </p>
-
-              <div className="contact__cta-row">
-                <a
-                  href={site.resumeUrl}
-                  className="btn btn--solid"
-                  target="_blank"
-                  rel="noreferrer"
-                  download
-                >
-                  Download résumé ↓
-                </a>
-                <CopyEmail email={site.email} />
-              </div>
-
-              <ul className="contact__meta">
-                <li>
-                  <span>Email</span>
-                  <a href={`mailto:${site.email}`}>{site.email}</a>
-                </li>
-                <li>
-                  <span>Book a call</span>
-                  <a href={site.calendly} target="_blank" rel="noreferrer">
-                    calendly.com/…/30min
+                <div className="contact__cta-row">
+                  <a
+                    href={site.calendly}
+                    className="btn btn--solid"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Book a 30 min call
                   </a>
-                </li>
-                {site.onlineJobs && (
+                  <CopyEmail email={site.email} />
+                </div>
+
+                <ul className="contact__meta">
                   <li>
-                    <span>OnlineJobs.ph</span>
-                    <a href={site.onlineJobs} target="_blank" rel="noreferrer">
-                      View profile
-                    </a>
+                    <span>Email</span>
+                    <a href={`mailto:${site.email}`}>{site.email}</a>
                   </li>
-                )}
-                <li>
-                  <span>Status</span>
-                  <em>Open to remote roles &amp; projects</em>
-                </li>
-              </ul>
+                  {site.onlineJobs && (
+                    <li>
+                      <span>OnlineJobs.ph</span>
+                      <a href={site.onlineJobs} target="_blank" rel="noreferrer">
+                        View profile
+                      </a>
+                    </li>
+                  )}
+                  <li>
+                    <span>Status</span>
+                    <em>Open to remote roles &amp; projects</em>
+                  </li>
+                </ul>
 
-              <div className="socials">
-                <a href={site.linkedin} target="_blank" rel="noreferrer">
-                  LinkedIn
-                </a>
-                <a href={site.instagram} target="_blank" rel="noreferrer">
-                  Instagram
-                </a>
-                <a href={site.facebook} target="_blank" rel="noreferrer">
-                  Facebook
-                </a>
+                <div className="socials">
+                  <a href={site.linkedin} target="_blank" rel="noreferrer">
+                    LinkedIn
+                  </a>
+                  <a href={site.instagram} target="_blank" rel="noreferrer">
+                    Instagram
+                  </a>
+                  <a href={site.facebook} target="_blank" rel="noreferrer">
+                    Facebook
+                  </a>
+                </div>
               </div>
-            </div>
 
-            <div className="contact__right">
-              <ContactForm />
+              <div className="contact__right">
+                <ContactForm />
+              </div>
             </div>
           </div>
         </section>
@@ -353,9 +243,9 @@ export default function Home() {
       <footer className="footer">
         <div className="wrap footer__inner">
           <a href="#top" className="nav__logo">
-            JV<span>.</span>
+            JV<span>.</span>Marte
           </a>
-          <p>© {new Date().getFullYear()} John Vincent Marte</p>
+          <p>© {new Date().getFullYear()} John Vincent Marte · Aklan, PH</p>
           <a href="#contact" className="link-arrow link-arrow--sm">
             Contact me →
           </a>
