@@ -20,15 +20,28 @@ project's `image` (or `gallery`) at it. That's it.
 
 | Project (slug) | Has image today | Still needs |
 |----------------|-----------------|-------------|
+| Azure Sands app (`azure-sands`) | ✅ `azure-condotel.png` | optional: admin dashboard, mobile |
+| Azure Ops Digest (`azure-ops-digest`) | ✅ `azure-ops-digest-canvas.png` | **the digest as received in Gmail** |
+| Azure Channel Sync (`azure-channel-sync`) | ✅ `azure-channel-sync-canvas.png` + 2 gallery shots | **blocked dates table, availability calendar, conflict alert** |
 | CC Source (`cc-source`) | ✅ `cc-source.png` | optional: mobile shot, detail |
 | Tawid Gutom (`tawid-gutom`) | ✅ `tawid-gutom.png` | optional: admin dashboard, mobile |
 | Silencio E-commerce (`silencio`) | ✅ `silencio-co.png` | optional: members area, mobile |
 | Silencio Accounting (`accounting-system`) | ✅ `silencio-accounting-dashboard.png` | optional: reports view |
+| Northside HVAC (`northside-hvac`) | ✅ `northside-hvac-router.png` | optional: scoring Code node, Sheets log |
+| Northside Missed Call (`northside-missed-call`) | ✅ `northside-missed-call.png` | optional: Callbacks sheet mid-escalation, escalation email |
 | Service Business CRM (`ghl-crm`) | ⬜ placeholder | **pipeline + workflow screenshots** |
 | Plumbing OS (`plumbing-os`) | ⬜ placeholder | **snapshot / automation screenshots** |
 
-The two GoHighLevel builds are the highest-value additions — a real pipeline and
-a workflow screenshot make the demos far more credible.
+Highest-value additions right now, in order:
+
+1. **The Azure Sands availability calendar** showing dates an imported Airbnb
+   reservation closed off. Every current automation shot proves a workflow ran;
+   that one proves the workflow changed the product.
+2. **The ops digest email as received**, which is the actual deliverable — the
+   canvas only shows the machine that produces it.
+3. **The two GoHighLevel builds**, still on placeholders.
+
+The full shot list for the two Azure automations lives in `../SCREENSHOTS.md`.
 
 ## Recommended dimensions
 

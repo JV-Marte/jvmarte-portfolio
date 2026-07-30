@@ -80,8 +80,7 @@ export default function Home() {
 
             <ul className="services__grid">
               {services.map((s, i) => (
-                <Reveal as="li" key={s.n} className="service" delay={i * 60}>
-                  <span className="service__num">{s.n}</span>
+                <Reveal as="li" key={s.title} className="service" delay={i * 60}>
                   <h3>{s.title}</h3>
                   <p>{s.blurb}</p>
                   <ul className="service__items">
