@@ -4,11 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import { site } from "@/lib/content";
 
 // "/#section" hrefs work from the homepage AND from /work/[slug] pages.
+// `external` links open in a new tab and never match the scroll-spy.
 const links = [
   { href: "/#services", label: "Services" },
   { href: "/#work", label: "Work" },
   { href: "/#tools", label: "Toolbox" },
   { href: "/#contact", label: "Contact" },
+  { href: site.resumeUrl, label: "Résumé", external: true },
 ];
 
 // section ids tracked for the active-link underline (in document order)
@@ -73,6 +75,8 @@ export default function Nav() {
                 ref={i === 0 ? firstLinkRef : null}
                 className={isActive ? "is-active" : ""}
                 aria-current={isActive ? "true" : undefined}
+                target={l.external ? "_blank" : undefined}
+                rel={l.external ? "noreferrer" : undefined}
                 onClick={() => setOpen(false)}
               >
                 {l.label}

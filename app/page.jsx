@@ -195,6 +195,14 @@ export default function Home() {
                   >
                     Book a 30 min call
                   </a>
+                  <a
+                    href={site.resumeUrl}
+                    className="btn btn--ghost"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Résumé
+                  </a>
                   <CopyEmail email={site.email} />
                 </div>
 
