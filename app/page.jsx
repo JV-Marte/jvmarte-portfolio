@@ -4,7 +4,16 @@ import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
 import WorkGrid from "@/components/WorkGrid";
 import CopyEmail from "@/components/CopyEmail";
-import { site, services, toolLevels, projects, badgeKey } from "@/lib/content";
+import {
+  site,
+  services,
+  toolLevels,
+  projects,
+  packages,
+  packagePerks,
+  packageIncludes,
+  badgeKey,
+} from "@/lib/content";
 
 const featuredProjects = projects.filter((p) => p.featured);
 const moreBuilds = projects.filter((p) => !p.featured);
@@ -138,8 +147,87 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ============== PACKAGES ============== */}
+        <section className="section section--alt" id="pricing">
+          <div className="wrap">
+            <header className="section__head">
+              <p className="eyebrow">Packages</p>
+              <h2 className="section__title">
+                Clear pricing, <em>no surprises.</em>
+              </h2>
+              <p className="section__intro">
+                Fixed price website builds. Pick the size that fits, or tell me
+                what you have in mind and I&rsquo;ll quote it. Every package
+                ships with the full list underneath, not a stripped down
+                version of it.
+              </p>
+            </header>
+
+            <div className="tiers">
+              {packages.map((p, i) => (
+                <Reveal
+                  as="article"
+                  key={p.name}
+                  className={`tier ${p.highlight ? "tier--featured" : ""}`}
+                  delay={i * 70}
+                >
+                  {p.highlight && (
+                    <span className="tier__flag">Most popular</span>
+                  )}
+
+                  <h3 className="tier__name">{p.name}</h3>
+                  <p className="tier__scope">{p.scope}</p>
+
+                  <p className="tier__price">
+                    {/* Rendered on every card so the amounts line up across the row */}
+                    <span className="tier__from">
+                      {p.from ? "Starts at" : "Fixed price"}
+                    </span>
+                    <span className="tier__amount">
+                      <span className="tier__currency">USD</span> {p.price}
+                    </span>
+                  </p>
+
+                  <p className="tier__blurb">{p.blurb}</p>
+
+                  <ul className="tier__perks">
+                    <li>{p.delivery}</li>
+                    {packagePerks.map((perk) => (
+                      <li key={perk}>{perk}</li>
+                    ))}
+                  </ul>
+
+                  <a
+                    href="#contact"
+                    className={`btn ${
+                      p.highlight ? "btn--solid" : "btn--ghost"
+                    } tier__cta`}
+                  >
+                    Start with {p.name}
+                  </a>
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal as="div" className="includes">
+              <h3 className="includes__title">Every package includes</h3>
+              <ul className="includes__list">
+                {packageIncludes.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <p className="includes__note">
+                Not sure which one fits?{" "}
+                <a href="#contact">Tell me what you need</a> and I&rsquo;ll
+                point you at the right size, even if it&rsquo;s the cheapest
+                one.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+
         {/* ============== TOOLBOX ============== */}
-        <section className="section section--alt" id="tools">
+        <section className="section" id="tools">
           <div className="wrap">
             <header className="section__head">
               <p className="eyebrow">Toolbox</p>

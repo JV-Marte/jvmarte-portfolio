@@ -1148,6 +1148,7 @@ a {
   .chip:hover,
   .pcard:hover,
   .service:hover,
+  .tier:hover,
   .more__item:hover {
     transition: none;
     transform: none;
@@ -1155,6 +1156,194 @@ a {
   .pcard:hover .pcard__media img {
     transform: none;
   }
+}
+
+/* ============================================================
+   PACKAGES (#pricing)
+   Four tiers in a row, one highlighted. Shared inclusions live in a
+   single strip underneath so the same 13 lines are not repeated in
+   every card. Colour is never the only signal: the lead tier carries
+   a "Most popular" label as well as the accent border.
+   ============================================================ */
+.tiers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.1rem;
+}
+@media (max-width: 1020px) {
+  .tiers {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.4rem;
+  }
+}
+@media (max-width: 560px) {
+  .tiers {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tier {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 1.6rem 1.35rem 1.35rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+.tier:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: #cfd9ea;
+}
+
+/* Lead tier: accent border + label, no gradient (reserved for headings). */
+.tier--featured {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+.tier__flag {
+  position: absolute;
+  top: -0.72rem;
+  left: 1.35rem;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.32em 0.8em;
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+}
+
+.tier__name {
+  font-size: 1.18rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+}
+.tier__scope {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--ink-faint);
+}
+
+.tier__price {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  margin-block: 0.5rem;
+  padding-block: 0.75rem;
+  border-block: 1px solid var(--line);
+}
+.tier__from {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.tier__amount {
+  font-size: clamp(1.6rem, 2.6vw, 1.95rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+.tier__currency {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  vertical-align: 0.5em;
+}
+
+.tier__blurb {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.tier__perks {
+  list-style: none;
+  padding: 0;
+  margin: 0.35rem 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.42rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.tier__perks li {
+  position: relative;
+  padding-left: 1.4rem;
+}
+.tier__perks li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--ok);
+  font-weight: 800;
+}
+
+.tier__cta {
+  margin-top: auto;
+  width: 100%;
+}
+
+/* Shared inclusions */
+.includes {
+  margin-top: clamp(2rem, 4vw, 2.75rem);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: clamp(1.3rem, 3vw, 1.9rem);
+  box-shadow: var(--shadow-sm);
+}
+.includes__title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.1rem;
+}
+.includes__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.6rem 1.4rem;
+  font-size: 0.94rem;
+  color: var(--ink-soft);
+}
+.includes__list li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.includes__list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--ok);
+  font-weight: 800;
+}
+.includes__note {
+  margin-top: 1.25rem;
+  padding-top: 1.05rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.includes__note a {
+  color: var(--accent);
+  font-weight: 600;
+}
+.includes__note a:hover {
+  text-decoration: underline;
 }
 
 /* ============================================================

@@ -8,13 +8,14 @@ import { site } from "@/lib/content";
 const links = [
   { href: "/#services", label: "Services" },
   { href: "/#work", label: "Work" },
+  { href: "/#pricing", label: "Pricing" },
   { href: "/#tools", label: "Toolbox" },
   { href: "/#contact", label: "Contact" },
   { href: site.resumeUrl, label: "Résumé", external: true },
 ];
 
 // section ids tracked for the active-link underline (in document order)
-const sectionIds = ["home", "services", "work", "tools", "contact"];
+const sectionIds = ["home", "services", "work", "pricing", "tools", "contact"];
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
