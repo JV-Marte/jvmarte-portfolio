@@ -21,6 +21,7 @@ project's `image` (or `gallery`) at it. That's it.
 | Project (slug) | Has image today | Still needs |
 |----------------|-----------------|-------------|
 | Azure Sands app (`azure-sands`) | ✅ `azure-condotel.png` | optional: admin dashboard, mobile |
+| Azure Fitness & Cafe (`azure-fitness-cafe`) | ✅ `azure-fitness-cafe.webp` + 3 gallery shots | optional: kitchen board, order status page |
 | Azure Ops Digest (`azure-ops-digest`) | ✅ `azure-ops-digest-canvas.png` | **the digest as received in Gmail** |
 | Azure Channel Sync (`azure-channel-sync`) | ✅ `azure-channel-sync-canvas.png` + 2 gallery shots | **blocked dates table, availability calendar, conflict alert** |
 | CC Source (`cc-source`) | ✅ `cc-source.png` | optional: mobile shot, detail |
