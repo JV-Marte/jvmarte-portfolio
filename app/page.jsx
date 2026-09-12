@@ -32,20 +32,17 @@ export default function Home() {
             <div className="hero__copy">
               <p className="hero__badge">
                 <span className="hero__badge-dot" aria-hidden="true" />
-                Available for remote roles, admin support & client projects
+                Available for remote roles and client projects
               </p>
 
               <h1 className="hero__title">
-                I build websites, automations, and back-office systems{" "}
-                <em>small businesses can actually run.</em>
+                Websites and systems that <em>keep work moving.</em>
               </h1>
 
               <p className="hero__lede">
-                I&rsquo;m JV, a web developer with a financial management
-                background. I help small businesses with the public-facing site
-                and the work behind it: booking flows, lead follow up,
-                spreadsheets, CRM records, bookkeeping support, and organized
-                admin systems.
+                I&rsquo;m JV. I build clean websites, booking flows, CRM
+                updates, automations, and simple finance-admin systems for
+                small businesses.
               </p>
 
               <div className="hero__actions">
@@ -59,16 +56,16 @@ export default function Home() {
 
               <ul className="hero__proof" aria-label="Portfolio highlights">
                 <li>
-                  <strong>Web + operations</strong>
-                  <span>Sites, forms, booking flows, and dashboards</span>
+                  <strong>Websites</strong>
+                  <span>Fast, clear pages that look credible</span>
                 </li>
                 <li>
-                  <strong>Finance admin</strong>
-                  <span>Bookkeeping support, spreadsheets, and reports</span>
+                  <strong>Automation</strong>
+                  <span>Forms, bookings, CRM, and follow ups</span>
                 </li>
                 <li>
-                  <strong>Remote-ready</strong>
-                  <span>Clear updates, handover notes, organized delivery</span>
+                  <strong>Support</strong>
+                  <span>Spreadsheets, records, and admin cleanup</span>
                 </li>
               </ul>
             </div>
@@ -87,7 +84,7 @@ export default function Home() {
 
               <div className="hero__status-card">
                 <p>Current focus</p>
-                <strong>Websites, automations, CRM, and finance admin</strong>
+                <strong>Web, automation, CRM, and finance admin</strong>
                 <span>Next.js · GoHighLevel · Excel · Google Sheets</span>
               </div>
             </div>
