@@ -12,6 +12,7 @@ import {
   packages,
   packagePerks,
   packageIncludes,
+  supportServices,
   badgeKey,
 } from "@/lib/content";
 
@@ -31,44 +32,64 @@ export default function Home() {
             <div className="hero__copy">
               <p className="hero__badge">
                 <span className="hero__badge-dot" aria-hidden="true" />
-                Available for new projects
+                Available for remote roles, admin support & client projects
               </p>
 
               <h1 className="hero__title">
-                Hi, I&rsquo;m JV. I build websites and{" "}
-                <em>keep your business running.</em>
+                I build websites, automations, and back-office systems{" "}
+                <em>small businesses can actually run.</em>
               </h1>
 
               <p className="hero__lede">
-                I design and build fast, credible sites for small businesses. I
-                also set up automations that handle the repetitive work, and I
-                look after the admin behind the scenes, from CRM records to
-                clean books.
+                I&rsquo;m JV, a web developer with a financial management
+                background. I help small businesses with the public-facing site
+                and the work behind it: booking flows, lead follow up,
+                spreadsheets, CRM records, bookkeeping support, and organized
+                admin systems.
               </p>
 
               <div className="hero__actions">
                 <a href="#contact" className="btn btn--solid">
-                  Get in touch
+                  Hire me / discuss a role
                 </a>
                 <a href="#work" className="btn btn--ghost">
-                  See my work ↓
+                  See proof ↓
                 </a>
               </div>
 
-              <p className="hero__trust">
-                Next.js · GoHighLevel · Zapier · Supabase · Google Sheets
-              </p>
+              <ul className="hero__proof" aria-label="Portfolio highlights">
+                <li>
+                  <strong>Web + operations</strong>
+                  <span>Sites, forms, booking flows, and dashboards</span>
+                </li>
+                <li>
+                  <strong>Finance admin</strong>
+                  <span>Bookkeeping support, spreadsheets, and reports</span>
+                </li>
+                <li>
+                  <strong>Remote-ready</strong>
+                  <span>Clear updates, handover notes, organized delivery</span>
+                </li>
+              </ul>
             </div>
 
-            <div className="hero__photo">
-              <Image
-                src="/assets/images/jv-photo.png"
-                alt="John Vincent Marte"
-                width={520}
-                height={640}
-                priority
-                className="hero__img"
-              />
+            <div className="hero__visual" aria-label="JV portfolio snapshot">
+              <div className="hero__photo">
+                <Image
+                  src="/assets/images/jv-photo.png"
+                  alt="John Vincent Marte"
+                  width={520}
+                  height={640}
+                  priority
+                  className="hero__img"
+                />
+              </div>
+
+              <div className="hero__status-card">
+                <p>Current focus</p>
+                <strong>Websites, automations, CRM, and finance admin</strong>
+                <span>Next.js · GoHighLevel · Excel · Google Sheets</span>
+              </div>
             </div>
           </div>
         </section>
@@ -90,6 +111,9 @@ export default function Home() {
             <ul className="services__grid">
               {services.map((s, i) => (
                 <Reveal as="li" key={s.title} className="service" delay={i * 60}>
+                  <span className="service__index">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   <h3>{s.title}</h3>
                   <p>{s.blurb}</p>
                   <ul className="service__items">
@@ -117,6 +141,19 @@ export default function Home() {
                 the outcome.
               </p>
             </header>
+
+            <Reveal as="div" className="work__spotlight">
+              <div>
+                <p className="work__spotlight-label">Why this matters</p>
+                <h3>Clients do not need another pretty page. They need a working flow.</h3>
+              </div>
+              <p>
+                The work below shows the parts employers and clients care
+                about: forms that submit, bookings that make sense, dashboards
+                that organize records, and follow-up systems that reduce manual
+                work.
+              </p>
+            </Reveal>
 
             <WorkGrid projects={featuredProjects} />
 
@@ -222,6 +259,49 @@ export default function Home() {
                 point you at the right size, even if it&rsquo;s the cheapest
                 one.
               </p>
+            </Reveal>
+
+            <Reveal as="div" className="support-offer">
+              <div className="support-offer__head">
+                <p className="eyebrow">Ongoing support</p>
+                <h3>
+                  Need help running the numbers and admin after the site is
+                  live?
+                </h3>
+                <p>
+                  I also take on regular support work connected to my financial
+                  management course: bookkeeping support, spreadsheet reporting,
+                  CRM cleanup, and back-office organization.
+                </p>
+              </div>
+
+              <div className="support-offer__grid">
+                {supportServices.map((service, i) => (
+                  <article className="support-card" key={service.title}>
+                    <span className="support-card__index">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p className="support-card__label">{service.label}</p>
+                    <h4>{service.title}</h4>
+                    <p>{service.blurb}</p>
+                    <ul>
+                      {service.items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+
+              <div className="support-offer__foot">
+                <p>
+                  Available as weekly or monthly support. Scope depends on your
+                  current tools, transaction volume, and handover process.
+                </p>
+                <a href="#contact" className="btn btn--solid">
+                  Ask about support work
+                </a>
+              </div>
             </Reveal>
           </div>
         </section>
