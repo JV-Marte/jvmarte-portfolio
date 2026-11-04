@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import { PaperPlaneRight } from "@phosphor-icons/react";
 
 // EmailJS keys (public — same as the previous static site).
 const PUBLIC_KEY = "oCo1aNN6MEkqQzwbv";
@@ -43,11 +44,11 @@ export default function ContactForm() {
       <div className="form__row">
         <label className="field">
           <span>Name</span>
-          <input type="text" name="name" placeholder="John Smith" required />
+          <input type="text" name="name" placeholder="Maria Santos" required />
         </label>
         <label className="field">
           <span>Email</span>
-          <input type="email" name="email" placeholder="john@company.com" required />
+          <input type="email" name="email" placeholder="maria@yourbusiness.com" required />
         </label>
       </div>
 
@@ -76,11 +77,17 @@ export default function ContactForm() {
       </label>
 
       <button type="submit" className="btn btn--solid btn--full" disabled={sending}>
-        {sending ? "Sending…" : "Send message →"}
+        {sending ? "Sending…" : "Send message"}
+        {!sending && <PaperPlaneRight size={16} aria-hidden="true" />}
       </button>
 
       {status.msg && (
-        <p className={`form__note form__note--${status.state}`}>{status.msg}</p>
+        <p
+          className={`form__note form__note--${status.state}`}
+          role={status.state === "error" ? "alert" : "status"}
+        >
+          {status.msg}
+        </p>
       )}
     </form>
   );

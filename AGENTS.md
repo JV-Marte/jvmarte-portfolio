@@ -1,6 +1,6 @@
 # JV Portfolio — Project Guide
 
-Personal portfolio site for **John Vincent Marte (JV)**, positioned around four
+Personal portfolio site for **John Vincent Marte (JV)**, positioned primarily as a **Virtual Assistant & Business Support** partner, with four
 services for small business owners: **web development, web design, automation,
 and business support** (CRM, spreadsheets, bookkeeping).
 
@@ -8,7 +8,7 @@ Live at **https://jvmarteportfolio.com** · repo **JV-Marte/jvmarte-portfolio**.
 
 > Note: this file describes the project as it is built. The site started as a
 > static HTML page, became a Next.js app with a hand-drawn theme, and was
-> redesigned in July 2026 into the current clean/bright theme. If you change
+> redesigned in November 2026 into the current warm editorial theme. If you change
 > direction (positioning, design language, stack), update this file.
 
 ---
@@ -19,15 +19,15 @@ Live at **https://jvmarteportfolio.com** · repo **JV-Marte/jvmarte-portfolio**.
 - **Static export**: `next.config.mjs` sets `output: "export"` → `next build`
   emits `./out`. `images.unoptimized`, `trailingSlash: true`.
 - **EmailJS** (`@emailjs/browser`) for the contact form (client-side, public keys).
-- **Google Fonts** via `next/font`: Inter only (weights 400–800), exposed as
+- **Google Fonts** via `next/font`: Archivo variable (UI) with a system Georgia serif for heading emphasis, exposed as
   `--font-sans` on `<html>`.
 - No CSS framework — one hand-written stylesheet (`app/globals.css`).
 
 ## Project structure
 
-- `app/layout.jsx` — Inter font, `<head>` metadata, JSON-LD structured data.
-- `app/page.jsx` — the single-page homepage (hero with portrait, services,
-  work grid + "More builds", toolbox chips, contact panel, footer). Kept
+- `app/layout.jsx` — Archivo font, `<head>` metadata, JSON-LD structured data.
+- `app/page.jsx` — the single-page homepage (hero with portrait, work grid + "More builds", services,
+  pricing and ongoing support, toolbox chips, contact panel, footer). Kept
   deliberately short; long-form project detail lives on the case-study pages.
 - `app/work/[slug]/page.jsx` — **case-study pages** (`/work/<slug>`), rendered
   data-driven from `projects` via `generateStaticParams` + `generateMetadata`.
@@ -42,7 +42,7 @@ Live at **https://jvmarteportfolio.com** · repo **JV-Marte/jvmarte-portfolio**.
   cards), `CopyEmail.jsx` (copy-to-clipboard), `ProjectPreview.jsx` (16:9
   screenshot frame, used on case pages), `Gallery.jsx` (lightbox, case pages).
 - `lib/content.js` — **all site copy + config**: `site` (contact/socials),
-  `services` (the four pillars), `toolLevels`, `projects`, plus `badgeKey()` /
+  `services` (the four pillars), `toolLevels`, `projects`, website `packages`, ongoing `supportServices`, plus `badgeKey()` /
   `projectBySlug()` helpers. See `SCREENSHOT_GUIDE.md` for adding images/résumé.
 - `public/assets/` — portrait + project screenshots (tool logos exist but are
   currently unused — the toolbox renders text chips). `public/CNAME` (custom
@@ -67,30 +67,18 @@ changes need no markup edits. Notable shapes:
 - **Copy voice**: plain, confident, client-focused, no em dashes ("·" separates
   title parts), no invented metrics or testimonials. Only CC Source is a
   confirmed client engagement.
-- **Résumé**: `site.resumeUrl` points at a PDF that does not exist yet, so no
-  page renders a download button. Add `public/JV-Marte-Resume.pdf`, then add
-  the button back (nav / contact) if wanted.
+- **Résumé**: `site.resumeUrl` points to the existing `public/JV-Marte-Resume.pdf`.
 
-## Design system (clean & bright)
+## Design system (warm editorial)
 
-Keep this aesthetic consistent for any new UI:
-
-- **Palette** (CSS vars in `:root`): white `--bg`, `--bg-soft` alternating
-  section tint, slate `--ink` / `--ink-soft`, blue `--accent` `#2563eb`, and
-  one gradient `--grad` (blue → violet) used only for `<em>` words in headings
-  and the hero photo glow.
-- **Type**: Inter everywhere; hierarchy comes from weight (800 headings,
-  negative tracking) and size, not extra typefaces.
-- **Surfaces**: cards are white with a 1px `--line` border, `--r` radius, and
-  a soft shadow on hover; buttons and chips are pills.
-- **Effects — deliberately restrained**: scroll reveals (`Reveal`), hover
-  lifts, image zoom inside project cards, pulsing availability dot, faint
-  masked grid + colour glow in the hero. Don't add more than this.
-- **Badges**: project type is never colour alone — the label names the type
-  and each type keeps a distinct dot shape (round / square / hollow).
-- **Accessibility**: honor `prefers-reduced-motion` — it disables `Reveal`,
-  the pulse, and hover transforms. Add reduced-motion fallbacks for any new
-  animation. Keep visible `:focus-visible` outlines.
+- Warm ivory `--paper` (#faf8f3), dark olive charcoal `--ink` (#242821), and burnt orange `--red` (#c34420). The legacy token name `--red` now means the orange accent; `--red-ink` is the darker accessible text variant.
+- Archivo for UI and body copy; Georgia italic for emphasized heading phrases. Sentence case, generous spacing, no equipment-manual or barcode styling.
+- Hero: split layout, large headline, identity-preserving edited portrait (`jv-portrait-editorial.webp`) with an arched frame, caption, and small static note. Natural color, no halftone filter.
+- Project proof leads after the hero. CC Source is the client feature; web builds use two-column rounded screenshot cards; automation examples use rounded rows. Preserve truthful project type labels and distinct badge markers.
+- Services use a pale sage section with a two-column grid. Pricing uses rounded cards with one dark sage featured tier. Contact sits on warm sand, with rounded light form fields.
+- Shared theme lives in `app/globals.css`; the editorial surface layer at the end overrides the reusable component layouts. Homepage and case studies share the same tokens and navigation.
+- Effects remain restrained: scroll reveals and small image hover zooms. Honor `prefers-reduced-motion`, preserve visible focus outlines, and keep touch targets usable.
+- The new portrait was edited with the built-in image tool: preserve likeness; charcoal overshirt over an off-white crewneck; warm ivory backdrop; soft natural lighting. Do not replace the source photo in Photos Library.
 
 ## Dev & deploy
 

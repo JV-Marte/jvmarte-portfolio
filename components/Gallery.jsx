@@ -1,8 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { CaretLeft, CaretRight, X } from "@phosphor-icons/react";
 
-// Screenshot strip for a project card: a row of sketched thumbnails that open
+// Screenshot strip for a case study: a row of thumbnails that open
 // a full-size lightbox. `screens` is an array of { src, label }.
 // Keyboard: Esc closes, ← / → step through images.
 export default function Gallery({ screens = [], title = "" }) {
@@ -37,7 +38,6 @@ export default function Gallery({ screens = [], title = "" }) {
 
   return (
     <div className="gallery">
-      <p className="gallery__label">A look inside</p>
       <ul className="gallery__thumbs">
         {screens.map((s, i) => (
           <li key={s.src}>
@@ -49,6 +49,7 @@ export default function Gallery({ screens = [], title = "" }) {
             >
               <img src={s.src} alt="" loading="lazy" />
             </button>
+            <span className="gallery__cap">{s.label}</span>
           </li>
         ))}
       </ul>
@@ -58,7 +59,7 @@ export default function Gallery({ screens = [], title = "" }) {
           className="lightbox"
           role="dialog"
           aria-modal="true"
-          aria-label={`${title} — ${screens[open].label}`}
+          aria-label={`${title}: ${screens[open].label}`}
           onClick={close}
         >
           <figure
@@ -68,7 +69,7 @@ export default function Gallery({ screens = [], title = "" }) {
             <img
               className="lightbox__img"
               src={screens[open].src}
-              alt={`${title} — ${screens[open].label}`}
+              alt={`${title}: ${screens[open].label}`}
             />
             <figcaption className="lightbox__caption">
               {screens[open].label}
@@ -81,7 +82,7 @@ export default function Gallery({ screens = [], title = "" }) {
             onClick={close}
             aria-label="Close"
           >
-            ✕
+            <X size={20} aria-hidden="true" />
           </button>
 
           {screens.length > 1 && (
@@ -95,7 +96,7 @@ export default function Gallery({ screens = [], title = "" }) {
                 }}
                 aria-label="Previous screenshot"
               >
-                ‹
+                <CaretLeft size={22} aria-hidden="true" />
               </button>
               <button
                 type="button"
@@ -106,7 +107,7 @@ export default function Gallery({ screens = [], title = "" }) {
                 }}
                 aria-label="Next screenshot"
               >
-                ›
+                <CaretRight size={22} aria-hidden="true" />
               </button>
             </>
           )}

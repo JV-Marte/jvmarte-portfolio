@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { site } from "@/lib/content";
+import Logo from "@/components/Logo";
 
 // "/#section" hrefs work from the homepage AND from /work/[slug] pages.
 // `external` links open in a new tab and never match the scroll-spy.
@@ -15,7 +16,7 @@ const links = [
 ];
 
 // section ids tracked for the active-link underline (in document order)
-const sectionIds = ["home", "services", "work", "pricing", "tools", "contact"];
+const sectionIds = ["home", "work", "services", "pricing", "tools", "contact"];
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -23,11 +24,16 @@ export default function Nav() {
   const [active, setActive] = useState("home");
   const firstLinkRef = useRef(null);
 
+  // Solid nav once the page has moved: watch the 24px #top sentinel instead
+  // of listening to every scroll frame.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const sentinel = document.getElementById("top");
+    if (!sentinel || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(([entry]) =>
+      setScrolled(!entry.isIntersecting)
+    );
+    io.observe(sentinel);
+    return () => io.disconnect();
   }, []);
 
   // Scroll-spy: mark the section nearest the top of the viewport active.
@@ -57,9 +63,7 @@ export default function Nav() {
   return (
     <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
       <div className="nav__inner">
-        <a href="#top" className="nav__logo" onClick={() => setOpen(false)}>
-          JV<span>.</span>Marte
-        </a>
+        <Logo href="/#top" onClick={() => setOpen(false)} />
 
         <nav
           id="primary-nav"

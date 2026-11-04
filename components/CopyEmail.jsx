@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Check, Copy } from "@phosphor-icons/react";
 
 // Copy-to-clipboard button for the contact email. Falls back gracefully
 // (a legacy execCommand path) if the async Clipboard API is unavailable,
@@ -37,7 +38,12 @@ export default function CopyEmail({ email }) {
       onClick={copy}
       aria-label={copied ? "Email copied to clipboard" : `Copy email ${email}`}
     >
-      {copied ? "Copied ✓" : "Copy email"}
+      {copied ? (
+        <Check size={16} aria-hidden="true" />
+      ) : (
+        <Copy size={16} aria-hidden="true" />
+      )}
+      {copied ? "Copied" : "Copy email"}
     </button>
   );
 }

@@ -1,12 +1,7 @@
 <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <!-- blue tile matching the site accent -->
-  <rect width="64" height="64" rx="14" fill="#2563eb"/>
-  <!-- "JV" monogram -->
-  <g fill="none" stroke="#ffffff" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round">
-    <!-- J -->
-    <path d="M18 16 H29"/>
-    <path d="M26 16 V36 C26 45 17 47 12 42"/>
-    <!-- V -->
-    <path d="M34 16 L43 48 L52 16"/>
+  <rect width="64" height="64" rx="32" fill="#c34420"/>
+  <g fill="none" stroke="#faf8f3" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 19H28M25 19V37C25 45 16 46 12 40"/>
+    <path d="M34 19L43 44L52 19"/>
   </g>
 </svg>

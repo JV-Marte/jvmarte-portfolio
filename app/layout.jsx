@@ -1,18 +1,19 @@
-import { Inter } from "next/font/google";
+import { Archivo } from "next/font/google";
 import "./globals.css";
 
-// One typeface, weight-driven hierarchy: Inter for everything.
-const inter = Inter({
+// Archivo provides the UI voice; editorial emphasis uses a system serif.
+const archivo = Archivo({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: "variable",
+  axes: ["wdth"],
   variable: "--font-sans",
   display: "swap",
 });
 
 const SITE_URL = "https://jvmarteportfolio.com";
-const TITLE = "JV Marte | Web Developer, Designer & Automation Specialist";
+const TITLE = "JV Marte | Virtual Assistant & Business Support";
 const DESCRIPTION =
-  "I design and build websites, set up automations, and handle the business support behind them. Live projects, honest tooling, based in the Philippines and working worldwide.";
+  "Virtual assistance and business support for small business owners: admin, CRM, spreadsheets, and bookkeeping support, with website development and automation. Based in the Philippines, working worldwide.";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -42,10 +43,10 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "/assets/images/jv-photo.png",
-        width: 520,
-        height: 640,
-        alt: "John Vincent Marte, Web Developer, Designer & Automation Specialist",
+        url: "/assets/images/jv-portrait-editorial.webp",
+        width: 1000,
+        height: 1250,
+        alt: "John Vincent Marte, Virtual Assistant & Business Support",
       },
     ],
   },
@@ -53,19 +54,19 @@ export const metadata = {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
-    images: ["/assets/images/jv-photo.png"],
+    images: ["/assets/images/jv-portrait-editorial.webp"],
   },
 };
 
 export const viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#faf8f3",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={archivo.variable}>
       <body>
         {/* Structured data — describes JV as a person offering a
             professional service, for richer search results. */}
@@ -75,16 +76,16 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
-              name: "JV Marte · Web Development, Design & Automation",
+              name: "JV Marte · Virtual Assistance & Business Support",
               description: DESCRIPTION,
               url: SITE_URL,
-              image: `${SITE_URL}/assets/images/jv-photo.png`,
+              image: `${SITE_URL}/assets/images/jv-portrait-editorial.webp`,
               areaServed: "Worldwide",
               email: "martejohnvincent13@gmail.com",
               founder: {
                 "@type": "Person",
                 name: "John Vincent Marte",
-                jobTitle: "Web Developer, Designer & Automation Specialist",
+                jobTitle: "Virtual Assistant & Business Support",
                 url: SITE_URL,
                 sameAs: [
                   "https://www.linkedin.com/in/john-vincent-marte-6b1530330/",
